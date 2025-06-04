@@ -3,6 +3,18 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 # Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+>
+>
+> ### ⚠️ Version Node recommandée
+>
+> Le projet utilise Node **v18.18.0**
+> Merci d’utiliser [`nvm`](https://github.com/nvm-sh/nvm) pour assurer la compatibilité.
+>
+> ```bash
+> nvm install
+> nvm use
+> ```
+>
 
 ## Step 1: Start Metro
 

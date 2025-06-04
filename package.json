@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "preinstall": "npm run check:node",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
@@ -38,6 +39,10 @@
     "typescript": "5.0.4"
   },
   "engines": {
-    "node": ">=18"
+    "node": "24.1.0",
+    "yarn": "1.22.19"
+  },
+  "scripts": {
+    "check:node": "node -e \"const [maj, min] = process.versions.node.split('.').map(Number); if (maj < 24 || (maj === 24 && min < 1)) { throw new Error('❌ Node >= 24.1.0 requis. Version actuelle: v' + process.version + '. Utilise nvm use'); } else { console.log('✅ Node OK : ' + process.version); }\""
   }
 }

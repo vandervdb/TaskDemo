@@ -1,78 +1,20 @@
-// App.tsx
-import React, {useState} from 'react';
-import {
-    SafeAreaView,
-    Text,
-    TextInput,
-    Button,
-    FlatList,
-    View,
-    StyleSheet,
-} from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TaskListScreen from './src/screens/TaskListScreen';
+import TaskDetailScreen from './src/screens/TaskDetailScreen';
+import { RootStackParamList } from './src/types/navigation';
 
-interface Task {
-    id: string;
-    title: String;
-}
-
+const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
-    const [task, setTask] = useState<string>('');
-    const [tasks, setTasks] = useState<Task[]>([]);
-
-    const addTask = () => {
-        if (task.trim()) {
-            setTasks(prev => [...prev, {id: Date.now().toString(), title: task}]);
-            setTask('');
-        }
-    };
-
-    const deleteTask = (id: string) => {
-        setTasks(prev => prev.filter(item => item.id !== id));
-    };
-
     return (
-        <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>
-                📋 Mes tâches
-            </Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Ajoutez une note"
-                value={task}
-                onChangeText={setTask}
-            />
-            <Button
-                title="Ajouter"
-                onPress={addTask}
-            />
-            <FlatList style={{ marginTop: 10}}
-                      data={tasks}
-                      keyExtractor={item => item.id}
-                      renderItem={({item}) => (
-                          <View style={styles.taskItem}>
-                              <Text>item.title</Text>
-                              <Button title="❌" onPress={() => deleteTask(item.id)}/>
-                          </View>
-                      )}
-                      ListEmptyComponent={<Text>Aucun élément pour l'instant</Text>}
-            />
-        </SafeAreaView>
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="TaskList" component={TaskListScreen} options={{ title: '📋 Mes tâches' }} />
+                <Stack.Screen name="TaskDetail" component={TaskDetailScreen} options={{ title: 'Détail de la tâche' }} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
-
-
 };
-
-const styles = StyleSheet.create({
-    container: {flex: 1, padding: 20},
-    title: {fontSize: 24, fontWeight: 'bold', marginBottom: 20},
-    input: {borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 6},
-    taskItem: {
-        padding: 10,
-        borderBottomWidth: 1,
-        marginBottom: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-});
 
 export default App;
