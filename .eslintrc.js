@@ -4,34 +4,30 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2021,
     sourceType: 'module',
-    ecmaFeatures: {jsx: true},
+    ecmaFeatures: { jsx: true },
   },
-  plugins: [
-    'react',
-    'react-native',
-    'prettier',
-    '@typescript-eslint',
-    'simple-import-sort',
-  ],
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react-native/all',
+    '@react-native',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
+  plugins: [
+    '@typescript-eslint',
+    'simple-import-sort',
+    'prettier',
+  ],
   rules: {
-    // 💅 Active le formatage Prettier
+    // 🧼 Formatage Prettier
     'prettier/prettier': 'warn',
 
-    // 🚀 Tri des imports
+    // 🧭 Tri automatique des imports
     'simple-import-sort/imports': 'warn',
     'simple-import-sort/exports': 'warn',
 
-    // 🔧 Autres règles utiles
+    // 🔍 Qualité de code
+    'no-unused-vars': 'off', // désactivé car on laisse @typescript-eslint gérer ça
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     'no-duplicate-imports': 'warn',
-    'no-unused-vars': ['warn', {argsIgnorePattern: '^_'}],
-    'react/react-in-jsx-scope': 'off', // inutile avec React 17+
   },
   settings: {
     react: {
