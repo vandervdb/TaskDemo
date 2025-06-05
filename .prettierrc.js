@@ -1,10 +1,7 @@
-module.exports = {
-  arrowParens: 'avoid',
-  bracketSameLine: true,
-  bracketSpacing: false,
+export default {
+  semi: true,
   singleQuote: true,
-  "semi": true,
-  "trailingComma": "es5",
-  "printWidth": 100,
-  "tabWidth": 2
+  trailingComma: 'all',
+  printWidth: 100,
+  tabWidth: 2,
 };

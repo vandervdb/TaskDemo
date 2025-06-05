@@ -1,64 +1,68 @@
-import {
-    View,
-    Text,
-    StyleSheet,
-    TextInput,
-    FlatList,
-    Button,
-    TouchableOpacity, SafeAreaView,
-} from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../types/navigation.ts';
-import {observer} from 'mobx-react-lite';
-import taskStore from '../stores/TaskStore';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
+import {
+  Button,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
+import taskStore from '../stores/TaskStore';
+import { RootStackParamList } from '../types/navigation.ts';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskList'>;
 
-const TaskListScreen: React.FC<Props> = observer(({navigation}) => {
-    const {tasks, newTask, setNewTask, addTask, deleteTask} = taskStore;
+const TaskListScreen: React.FC<Props> = observer(({ navigation }) => {
+  const { tasks, newTask, setNewTask, addTask, deleteTask } = taskStore;
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <TextInput
-                placeholder="Ajouter une tâche..."
-                value={newTask}
-                onChangeText={setNewTask}
-                style={styles.input}
-            />
+  return (
+    <SafeAreaView style={styles.container}>
+      <TextInput
+        placeholder="Ajouter une tâche..."
+        value={newTask}
+        onChangeText={setNewTask}
+        style={styles.input}
+      />
 
-            <Button title="Ajouter" onPress={addTask}/>
+      <Button title="Ajouter" onPress={addTask} />
 
-            <FlatList
-                data={tasks}
-                keyExtractor={item => item.id}
-                renderItem={({item}) => (
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate('TaskDetail', {taskId: item.id, taskTitle: item.name})}
-                    >
-                        <View style={styles.taskItem}>
-                            <Text>{item.name}</Text>
-                            <Button title="❌" onPress={() => deleteTask(item.id)}/>
-                        </View>
-                    </TouchableOpacity>
-                )}
-                ListEmptyComponent={<Text>Aucune tâche pour l’instant</Text>}
-                style={{marginTop: 20}}
-            />
-        </SafeAreaView>
-    );
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('TaskDetail', { taskId: item.id, taskTitle: item.name })
+            }
+          >
+            <View style={styles.taskItem}>
+              <Text>{item.name}</Text>
+              <Button title="❌" onPress={() => deleteTask(item.id)} />
+            </View>
+          </TouchableOpacity>
+        )}
+        ListEmptyComponent={<Text>Aucune tâche pour l’instant</Text>}
+        style={{ marginTop: 20 }}
+      />
+    </SafeAreaView>
+  );
 });
 
 const styles = StyleSheet.create({
-    container: {flex: 1, padding: 20},
-    input: {borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 6},
-    taskItem: {
-        padding: 10,
-        borderBottomWidth: 1,
-        marginBottom: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
+  container: { flex: 1, padding: 20 },
+  input: { borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 6 },
+  taskItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });
 
 export default TaskListScreen;
