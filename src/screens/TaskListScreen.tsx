@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
     View,
     Text,
@@ -6,62 +5,53 @@ import {
     TextInput,
     FlatList,
     Button,
-    TouchableOpacity, SafeAreaView
-} from "react-native";
-import { NativeStackScreenProps} from "@react-navigation/native-stack";
-import {RootStackParamList} from "../types/navigation.ts";
+    TouchableOpacity, SafeAreaView,
+} from 'react-native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../types/navigation.ts';
+import {observer} from 'mobx-react-lite';
+import taskStore from '../stores/TaskStore';
+import React from 'react';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskList'>;
 
-const TaskListScreen: React.FC<Props> = ({ navigation }) => {
-    const [task, setTask] = useState('');
-    const [tasks, setTasks] = useState<Task[]>([]);
-
-    const addTask = () => {
-        if (task.trim()) {
-            setTasks(prev => [...prev, {id: Date.now(), title: task}]);
-            setTask('');
-        }
-    };
-
-    const deleteTask = (id: string) => {
-        setTasks( prev => prev.filter(item => item.id !== id));
-    };
+const TaskListScreen: React.FC<Props> = observer(({navigation}) => {
+    const {tasks, newTask, setNewTask, addTask, deleteTask} = taskStore;
 
     return (
         <SafeAreaView style={styles.container}>
             <TextInput
                 placeholder="Ajouter une tâche..."
-                value={task}
-                onChangeText={setTask}
+                value={newTask}
+                onChangeText={setNewTask}
                 style={styles.input}
             />
 
-            <Button title="Ajouter" onPress={addTask} />
+            <Button title="Ajouter" onPress={addTask}/>
 
             <FlatList
                 data={tasks}
                 keyExtractor={item => item.id}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('TaskDetail', { taskId: item.id, taskTitle: item.title })}
+                        onPress={() => navigation.navigate('TaskDetail', {taskId: item.id, taskTitle: item.name})}
                     >
                         <View style={styles.taskItem}>
-                            <Text>{item.title}</Text>
-                            <Button title="❌" onPress={() => deleteTask(item.id)} />
+                            <Text>{item.name}</Text>
+                            <Button title="❌" onPress={() => deleteTask(item.id)}/>
                         </View>
                     </TouchableOpacity>
                 )}
                 ListEmptyComponent={<Text>Aucune tâche pour l’instant</Text>}
-                style={{ marginTop: 20 }}
+                style={{marginTop: 20}}
             />
         </SafeAreaView>
     );
-};
+});
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 20 },
-    input: { borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 6 },
+    container: {flex: 1, padding: 20},
+    input: {borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 6},
     taskItem: {
         padding: 10,
         borderBottomWidth: 1,
