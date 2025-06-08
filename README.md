@@ -1,6 +1,7 @@
 # TaskDemo
 
-Cette application mobile est un petit gestionnaire de tâches écrit avec **React Native** et **TypeScript**. Elle utilise la bibliothèque **React Navigation** pour passer d'un écran à l'autre (liste et détail d'une tâche).
+TaskDemo est une mini application de gestion de tâches écrite en **React Native** et **TypeScript**. La navigation entre l’écran de liste et l’écran de détail s’appuie sur **React Navigation**.
+
 
 ## Fonctionnalités
 
@@ -18,6 +19,7 @@ Cette application mobile est un petit gestionnaire de tâches écrit avec **Reac
 ```bash
 nvm install
 nvm use
+yarn check:node
 ```
 
 ## Installation
@@ -47,6 +49,11 @@ Les tests unitaires sont lancés avec :
 ```bash
 yarn test
 ```
+
+## Autres commandes utiles
+
+- `yarn lint` : analyse statique du code
+- `yarn check:node` : vérifie la version de Node.js
 
 ## Structure principale
 
