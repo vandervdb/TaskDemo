@@ -37,11 +37,14 @@ const TaskListScreen: React.FC<Props> = observer(({ navigation }) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('TaskDetail', { taskId: item.id, taskTitle: item.name })
+              navigation.navigate('TaskDetail', {
+                taskId: item.id,
+                taskTitle: item.title,
+              })
             }
           >
             <View style={styles.taskItem}>
-              <Text>{item.name}</Text>
+              <Text>{item.title}</Text>
               <Button title="❌" onPress={() => deleteTask(item.id)} />
             </View>
           </TouchableOpacity>
@@ -55,13 +58,13 @@ const TaskListScreen: React.FC<Props> = observer(({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20 },
-  input: { borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 6 },
+  input: { borderRadius: 6, borderWidth: 1, marginBottom: 10, padding: 10 },
   taskItem: {
-    padding: 10,
     borderBottomWidth: 1,
-    marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 10,
+    padding: 10,
   },
 });
 

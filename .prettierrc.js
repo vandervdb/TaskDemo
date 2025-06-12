@@ -1,7 +1,7 @@
-export default {
+// .prettierrc.js (CommonJS syntaxe)
+module.exports = {
   semi: true,
   singleQuote: true,
   trailingComma: 'all',
-  printWidth: 100,
-  tabWidth: 2,
+  printWidth: 80,
 };
