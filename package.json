@@ -23,6 +23,7 @@
     "mobx-react-lite": "^4.1.0",
     "react": "19.0.0",
     "react-native": "0.79.2",
+    "react-native-keychain": "^10.0.0",
     "react-native-safe-area-context": "^5.4.1",
     "react-native-screens": "^4.11.1"
   },
@@ -70,5 +71,4 @@
       "prettier --write"
     ]
   }
-
 }
