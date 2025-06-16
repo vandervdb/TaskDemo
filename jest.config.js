@@ -11,6 +11,7 @@ module.exports = {
   setupFiles: ['<rootDir>/jest/setup.js'],
   moduleNameMapper: {
     '^react-dom$': '<rootDir>/__mocks__/react-dom.js',
+    '^@/(.*)$': '<rootDir>/@/$1',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };

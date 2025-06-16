@@ -51,8 +51,8 @@ yarn test
 ## Structure principale
 
 - `App.tsx` : configuration de la navigation
-- `src/screens/TaskListScreen.tsx` : affichage et gestion de la liste de tâches
-- `src/screens/TaskDetailScreen.tsx` : affichage du détail d'une tâche
+- `@/screens/TaskListScreen.tsx` : affichage et gestion de la liste de tâches
+- `@/screens/TaskDetailScreen.tsx` : affichage du détail d'une tâche
 - `__tests__/` : tests Jest
 
 Ce dépôt se veut simple et peut servir de base pour des expérimentations autour de React Native.

@@ -12,13 +12,15 @@ import {
   View,
 } from 'react-native';
 
-import taskStore from '../stores/TaskStore';
+import taskStore from '@/stores/TaskStore';
+import spotifyStore from '@/stores/SpotifyStore';
 import { RootStackParamList } from '../types/navigation.ts';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskList'>;
 
 const TaskListScreen: React.FC<Props> = observer(({ navigation }) => {
   const { tasks, newTask, setNewTask, addTask, deleteTask } = taskStore;
+  const { authParams } = spotifyStore;
 
   return (
     <SafeAreaView style={styles.container}>

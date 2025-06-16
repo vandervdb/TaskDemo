@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { makeAutoObservable, observable, runInAction } from 'mobx';
+import log from '@/logs/logger.ts';
 
 export interface Task {
   id: string;
@@ -16,7 +17,7 @@ export class TaskStore {
       tasks: observable,
       newTask: observable,
     });
-    this.loadTasks().then(() => console.log('Tasks chargées'));
+    this.loadTasks().then(() => log.debug('Tasks chargées'));
   }
 
   setNewTask(title: string) {
@@ -47,10 +48,7 @@ export class TaskStore {
 
   private async saveTask() {
     try {
-      await AsyncStorage.setItem(
-        this.tasksStorageKey,
-        JSON.stringify(this.tasks),
-      );
+      await AsyncStorage.setItem(this.tasksStorageKey, JSON.stringify(this.tasks));
     } catch (e) {
       console.error('Erreur lors de la sauvegarde des Tâches', e);
     }

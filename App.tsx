@@ -2,9 +2,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
-import TaskDetailScreen from './src/screens/TaskDetailScreen';
-import TaskListScreen from './src/screens/TaskListScreen';
-import { RootStackParamList } from './src/types/navigation';
+import TaskDetailScreen from '@/screens/TaskDetailScreen';
+import TaskListScreen from '@/screens/TaskListScreen';
+import { RootStackParamList } from '@/types/navigation';
+import '@/stores';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
